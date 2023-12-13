@@ -5,33 +5,17 @@ x = [7,3,2]
 y = [5,7,9]
 
 # Calculate the mean of x and y
-xSum = sum(x)
-xMean = xSum / len(x)
-ySum = sum(y)
-yMean = ySum / len(y)
-#Lists
-xiXList = []
-yiYList = []
-xiXyiYList = []
-xPowerList = []
-yPowerList = []
+xMean = sum(x) / len(x)
+yMean = sum(y) / len(y)
 
-for i in x:
-    xiXcalc = i - xMean
-    xiXList.append(xiXcalc)
-    xPowerList.append(math.pow(xiXcalc,2))
+# Lists
+xiXList = [i - xMean for i in x]
+yiYList = [i - yMean for i in y]
+xiXyiYList = [i * j for i, j in zip(xiXList, yiYList)]
+xPowerList = [math.pow(i, 2) for i in xiXList]
+yPowerList = [math.pow(i, 2) for i in yiYList]
 
-for i in y:
-    yiYcalc = i - yMean
-    yiYList.append(yiYcalc)
-    yPowerList.append(math.pow(yiYcalc,2))
-
-for i, j in zip(xiXList, yiYList):
-    xiXyiYcalc = i * j
-    xiXyiYList.append(xiXyiYcalc)
-
-
-# Pearson correlation calculation
+# calculate correlation as r
 r = sum(xiXyiYList) / math.sqrt(sum(xPowerList) * sum(yPowerList))
 
 print(r)
